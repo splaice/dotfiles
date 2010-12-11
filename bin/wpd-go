@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+
+# mysql
+mysqladmin status &> /dev/null
+if [ "$?" == "1" ] ; then
+	echo -n "Starting mysql: "
+	mysqld_safe &> /dev/null &
+	echo "done"
+fi
+
+# gearman
+if [ -e $GEARMAN_PID ] ; then
+	ps -p $(cat $GEARMAN_PID) &> /dev/null
+	if [ "$?" == "1" ] ; then
+		cd $HUG_ROOT/scripts
+		sudo HUG_ROOT=$HUG_ROOT ./gearman start &> /dev/null
+	fi
+else
+	cd $HUG_ROOT/scripts
+	sudo HUG_ROOT=$HUG_ROOT ./gearman start &> /dev/null
+fi
+
+# jobd
+if [ -e $JOBD_PID ] ; then
+	ps -p $(cat $JOBD_PID) &> /dev/null
+	if [ "$?" == "1" ] ; then
+		cd $HUG_ROOT/scripts
+		sudo HUG_ROOT=$HUG_ROOT ./jobd start &> /dev/null
+	fi
+else
+	cd $HUG_ROOT/scripts
+	sudo HUG_ROOT=$HUG_ROOT ./jobd start &> /dev/null
+fi
+
+cd $HUG_ROOT/sites/wpd/nest
+paster serve --reload ../config/development.ini
