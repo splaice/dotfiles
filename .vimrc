@@ -152,3 +152,6 @@ au BufRead,BufNewFile Makefile* set noexpandtab
 
 " All
 highlight BadWhitespace ctermbg=red guibg=red
+
+" NERDTree
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.sqlite$']
