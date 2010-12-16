@@ -2,7 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export PATH=/usr/local/Cellar/python/2.7/bin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
+if [ -d /usr/local/Cellar/python/2.7.1/bin ] ; then
+    PYBINPATH=/usr/local/Cellar/python/2.7.1/bin
+elif [ -d /usr/local/Cellar/python/2.7/bin ] ; then
+    PYBINPATH=/usr/local/Cellar/python/2.7/bin
+else
+    PYBINPATH=""
+fi
+
+export PATH=$PYBINPATH:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 export MANPATH=$MANPATH:/opt/local/man
 export EDITOR=vim
 export VISUAL=vim
