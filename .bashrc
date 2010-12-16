@@ -10,7 +10,13 @@ else
     PYBINPATH=""
 fi
 
-export PATH=$PYBINPATH:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
+if [ -d /usr/local/Cellar/ruby/1.9.2-p0/bin ] ; then
+    RBBINPATH=/usr/local/Cellar/ruby/1.9.2-p0/bin
+else
+    RBBINPATH=""
+fi
+
+export PATH=$PYBINPATH:$RBBINPATH:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 export MANPATH=$MANPATH:/opt/local/man
 export EDITOR=vim
 export VISUAL=vim
