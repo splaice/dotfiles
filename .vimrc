@@ -156,8 +156,15 @@ au BufRead,BufNewFile *html set tabstop=2
 au BufRead,BufNewFile *html set expandtab
 au BufRead,BufNewFile *html set textwidth=99
 
+" SCSS
+au BufRead,BufNewFile *.scss set shiftwidth=2
+au BufRead,BufNewFile *scss set tabstop=2
+au BufRead,BufNewFile *scss set expandtab
+au BufRead,BufNewFile *.scss set filetype=scss
+
 " All
 highlight BadWhitespace ctermbg=red guibg=red
+
 
 " NERDTree
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.sqlite$']
