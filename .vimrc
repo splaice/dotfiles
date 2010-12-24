@@ -117,7 +117,7 @@ if has("gui_running")
 	set guifont=Mensch:h14
 	set showtabline=2
 	set lines=100
-	set columns=100
+	set columns=136
 endif
 
 " Python
@@ -149,6 +149,12 @@ au BufNewFile *.c,*.h set fileformat=unix
 
 " Make
 au BufRead,BufNewFile Makefile* set noexpandtab
+
+" HTML and HTML Templates
+au BufRead,BufNewFile *.html set shiftwidth=2
+au BufRead,BufNewFile *html set tabstop=2
+au BufRead,BufNewFile *html set expandtab
+au BufRead,BufNewFile *html set textwidth=99
 
 " All
 highlight BadWhitespace ctermbg=red guibg=red
