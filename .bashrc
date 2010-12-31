@@ -18,8 +18,8 @@ fi
 
 export PATH=$PYBINPATH:$RBBINPATH:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 export MANPATH=$MANPATH:/opt/local/man
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=mvim
+export VISUAL=mvim
 export DISPLAY=:0.0
 export CLICOLOR=1
 export LSCOLORS=dxfxcxdxbxegedabagacad
