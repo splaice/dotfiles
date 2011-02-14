@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# vim stuff
+if [ ! -h "$HOME/.vim" ] ; then
+    ln -s $HOME/.dotfiles/.vim $HOME/.vim
+fi
+
+if [ ! -h "$HOME/.vimrc" ] ; then
+    ln -s $HOME/.dotfiles/.vim/vimrc $HOME/.vimrc
+fi
+
+if [ ! -h "$HOME/.vimrc.local" ] ; then
+    ln -s $HOME/.dotfiles/.vimrc.local $HOME/.vimrc.local
+fi
+
+if [ ! -h "$HOME/.gvimrc" ] ; then
+    ln -s $HOME/.dotfiles/.vim/gvimrc $HOME/.gvimrc
+fi
+
+if [ ! -h "$HOME/.gvimrc.local" ] ; then
+    ln -s $HOME/.dotfiles/.gvimrc.local $HOME/.gvimrc.local
+fi
+
+# git stuff
+if [ ! -h "$HOME/.gitconfig" ] ; then
+    ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
+fi
+
+# ssh stuff
+if [ ! -h "$HOME/.ssh/config" ] ; then
+    ln -s $HOME/.dotfiles/.ssh/config $HOME/.ssh/config
+fi
+
+if [ ! -h "$HOME/.ssh/enviornment" ] ; then
+    ln -s $HOME/.dotfiles/.ssh/config $HOME/.ssh/enviornment
+fi
+
+# screen stuff
+if [ ! -h "$HOME/.screenrc" ] ; then
+    ln -s $HOME/.dotfiles/.screenrc $HOME/.screenrc
+fi
