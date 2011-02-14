@@ -1,7 +1,7 @@
 alias ll="ls -hGlrt"
 alias la="ls -hGlrta"
 alias d="date +'%Y-%m-%d %H:%M'"
-alias vi='vim'
+alias vi='mvim'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -15,3 +15,4 @@ alias ho='cd $HOME/Projects/hug-ops'
 alias h='cd $HOME/Projects/hug'
 alias t='cd $HOME/Projects/Tempest'
 alias k='cd $HOME/Projects/Kettle'
+alias e='cd $HOME/Projects/eggcartel/Website/Automaton'

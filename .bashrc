@@ -32,18 +32,11 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-# Set default debian color font if it is supported
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
 # If this is a computer i work from set prompt that make it obvious
 # (hostname ending with .local identifier works good enough)
 if [[ "$(hostname)" == *.local ]] ; then
-	PS1="\[\e[7;32m\]\u@\h \W$\[\e[m\] "
+	#export PS1="\[\e[7;32m\]\u@\h \W$\[\e[m\] "
+	export PS1="\u@\h \W$ "
 fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
