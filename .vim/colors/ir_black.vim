@@ -11,7 +11,7 @@
 "  string: #A8FF60  168:255:96                   
 "    string inner (punc, code, etc): #00A0A0  0:160:160
 "  number: #FF73FD  255:115:253                 
-"  comments: #ECECEC  124:124:124
+"  comments: #7C7C7C  124:124:124
 "  keywords: #96CBFE  150:203:254             
 "  operators: white
 "  class: #FFFFB6  255:255:182
@@ -42,7 +42,7 @@
 " ********************************************************************************
 " The following are the preferred 16 colors for your terminal
 "           Colors      Bright Colors
-" Black     #4E4E4E     #ECECEC
+" Black     #4E4E4E     #7C7C7C
 " Red       #FF6C60     #FFB6B0
 " Green     #A8FF60     #CEFFAB
 " Yellow    #FFFFB6     #FFFFCB
@@ -103,7 +103,7 @@ if version >= 700 " Vim 7.x specific colors
 endif
 
 " Syntax highlighting
-hi Comment          guifg=#ECECEC     guibg=NONE        gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
+hi Comment          guifg=#7C7C7C     guibg=NONE        gui=NONE      ctermfg=darkgray    ctermbg=NONE        cterm=NONE
 hi String           guifg=#A8FF60     guibg=NONE        gui=NONE      ctermfg=green       ctermbg=NONE        cterm=NONE
 hi Number           guifg=#FF73FD     guibg=NONE        gui=NONE      ctermfg=magenta     ctermbg=NONE        cterm=NONE
 

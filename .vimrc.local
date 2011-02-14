@@ -1,0 +1,12 @@
+" Whitespace stuff
+set nowrap
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set list listchars=tab:\ \ ,trail:·
+
+" Python
+au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
+au BufRead,BufNewFile *py,*pyw set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw set expandtab
