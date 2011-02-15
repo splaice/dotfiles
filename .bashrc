@@ -54,19 +54,19 @@ txtrst='\e[0m'    # Text Reset
 
 function prompt_command() {
   local scm=""
-  local changes=$txtgrn
+  local changes=$txtblk$bakwht
   local branch=""
   # check for git
   if git status &> /dev/null; then
     branch="$(git branch --no-color | head -1 | cut -d' ' -f 2)"
     if git status -s | grep -q '^[[:space:]][MA] '; then
-      changes=$txtred
+      changes=$txtblk$bakred
     fi
-    scm="(${changes}\]${branch}${txtrst}\])"
+    scm="${changes}\] ${branch} ${txtrst}\]"
   fi
 
   # export PS1
-  PS1=''"${HOST_COLOUR}"'\]\u@\h'"${txtrst}"'\] '"${txtwht}"'\]\w'"${txtrst}"'\]\n'"${scm}"'$ '
+  PS1=''"${HOST_COLOUR}"'\]\u@\h'"${txtrst}"'\]'"${scm}"' '"${txtwht}"'\]\w'"${txtrst}"'\]\n\$ '
 
   # set the title
   case "$TERM" in
