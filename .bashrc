@@ -4,13 +4,17 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-if [[ "$UNAME" -eq "Darwin" ]] ; then
-    if [ -f ~/.bash_aliases ]; then
+UNAME=$(uname)
+if [[ "$UNAME" == "Darwin" ]] ; then
+    echo "Darwin - $UNAME"
+    if [ -f ~/.bashrc_darwin ]; then
         source  ~/.bashrc_darwin
     fi
+fi
 
-elif [[ "$UNAME" == "Linux" ]] ; then
-    if [ -f ~/.bash_aliases ]; then
+if [[ "$UNAME" == "Linux" ]] ; then
+    echo "Linux - $UNAME"
+    if [ -f ~/.bashrc_linux ]; then
         source  ~/.bashrc_linux
     fi
 fi
