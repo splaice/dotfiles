@@ -20,3 +20,6 @@ export VISUAL=mvim
 export DISPLAY=:0.0
 export CLICOLOR=1
 export LSCOLORS=dxfxcxdxbxegedabagacad
+
+alias ll="ls -hGlrt"
+alias la="ls -hGlrta"
