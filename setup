@@ -35,9 +35,9 @@ if [ ! -h "$HOME/.ssh/enviornment" ] ; then
     ln -s $HOME/.dotfiles/.ssh/config $HOME/.ssh/enviornment
 fi
 
-# screen stuff
-if [ ! -h "$HOME/.screenrc" ] ; then
-    ln -s $HOME/.dotfiles/.screenrc $HOME/.screenrc
+# tmux stuff
+if [ ! -h "$HOME/.tmux.conf" ] ; then
+    ln -s $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 fi
 
 # bash stuff
