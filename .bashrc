@@ -16,6 +16,9 @@ if [[ "$UNAME" == "Linux" ]] ; then
         source  ~/.bashrc_linux
     fi
 fi
+if [ -f ~/.bashrc_local ]; then
+    source  ~/.bashrc_local
+fi
 
 # colors
 txtblk='\e[0;30m' # Black - Regular
