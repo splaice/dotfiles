@@ -10,3 +10,8 @@ set list listchars=tab:\ \ ,trail:·
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
 au BufRead,BufNewFile *py,*pyw set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw set expandtab
+
+" PHP
+au BufRead,BufNewFile *.php set shiftwidth=2
+au BufRead,BufNewFile *.php set tabstop=2
+au BufRead,BufNewFile *.php set expandtab
