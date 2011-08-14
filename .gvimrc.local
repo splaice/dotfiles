@@ -1,8 +1,0 @@
-set cursorline  " highling current line
-hi cursorline guibg=#000000
-set guifont=Mensch:h14
-set guioptions-=r	" no scrollbar on the right
-set guioptions-=l	" no scrollbar on the left
-
-" All
-highlight BadWhitespace ctermbg=red guibg=red
