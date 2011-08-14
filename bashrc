@@ -6,14 +6,14 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 UNAME=$(uname)
 if [[ "$UNAME" == "Darwin" ]] ; then
-    if [ -f ~/.bashrc_darwin ]; then
-        source  ~/.bashrc_darwin
+    if [ -f ~/.bashrc.d/darwin ]; then
+        source  ~/.bashrc.d/darwin
     fi
 fi
 
 if [[ "$UNAME" == "Linux" ]] ; then
-    if [ -f ~/.bashrc_linux ]; then
-        source  ~/.bashrc_linux
+    if [ -f ~/.bashrc.d/linux ]; then
+        source  ~/.bashrc.d/linux
     fi
 fi
 if [ -f ~/.bashrc_local ]; then
