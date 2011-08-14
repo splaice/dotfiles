@@ -1,4 +1,4 @@
-.my.cnf
+.DS_*
 .ssh/id_dsa
 .ssh/known_hosts
 .ssh/*.pem
