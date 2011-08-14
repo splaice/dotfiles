@@ -1,8 +1,7 @@
-.PHONY: all bash tmux screen git bin
+.PHONY: all
 
-all: bash tmux screen git bin
-
-bash: ~/.bashrc ~/.bash_profile ~/.bashrc.d
+all: ~/.bashrc ~/.bash_profile ~/.bashrc.d ~/.tmux.conf ~/.screenrc \
+	~/.gitconfig ~/bin ~/.ssh/config ~/.ssh/environment
 
 ~/.bashrc:
 	ln -s .dotfiles/bashrc ~/.bashrc
@@ -16,22 +15,20 @@ bash: ~/.bashrc ~/.bash_profile ~/.bashrc.d
 ~/.bashrc.d:
 	ln -s .dotfiles/bashrc.d ~/.bashrc.d
 
-tmux: ~/.tmux.conf
-
 ~/.tmux.conf:
 	ln -s .dotfiles/tmux.conf ~/.tmux.conf
-
-screen: ~/.screenrc
 
 ~/.screenrc:
 	ln -s .dotfiles/screenrc ~/.screenrc
 
-git: ~/.gitconfig
-
 ~/.gitconfig:
 	ln -s .dotfiles/gitconfig ~/.gitconfig
 
-bin: ~/bin
-
 ~/bin:
 	ln -s .dotfiles/bin ~/bin
+
+~/.ssh/config:
+	ln -s .dotfiles/ssh/config ~/.ssh/config
+
+~/.ssh/environment:
+	ln -s .dotfiles/ssh/environment ~/.ssh/environment
