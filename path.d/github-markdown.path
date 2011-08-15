@@ -1,0 +1,2 @@
+ADDPATH="/usr/local/Cellar/ruby/1.9.2-p290/lib/ruby/gems/1.9.1/gems/github-markup-0.5.3/bin"
+export PATH=$PATH:$ADDPATH

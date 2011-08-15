@@ -114,3 +114,9 @@ if [ -f /etc/bash_completion ]; then
     bind "set show-all-if-ambiguous On"  # this allows you to automatically show completion without
                                          # double tab-ing
 fi
+
+if [ -d "$HOME/.path.d" ] ; then
+    for path_file in $(ls -1 $HOME/.path.d/*.path); do
+      source $path_file
+    done
+fi

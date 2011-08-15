@@ -1,0 +1,1 @@
+export PATH=$PATH:/usr/local/Cellar/ruby/1.9.2-p290/bin
