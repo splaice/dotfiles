@@ -7,13 +7,13 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 UNAME=$(uname)
 if [[ "$UNAME" == "Darwin" ]] ; then
     if [ -f ~/.bashrc.d/darwin ]; then
-        source  ~/.bashrc.d/darwin
+        source  ~/.bashrc_darwin
     fi
 fi
 
 if [[ "$UNAME" == "Linux" ]] ; then
     if [ -f ~/.bashrc.d/linux ]; then
-        source  ~/.bashrc.d/linux
+        source  ~/.bashrc_linux
     fi
 fi
 if [ -f ~/.bashrc_local ]; then
@@ -115,7 +115,13 @@ if [ -f /etc/bash_completion ]; then
                                          # double tab-ing
 fi
 
-if [ -d "$HOME/.path.d" ] ; then
+if [ -f "$HOME/.env.d/*.env" ] ; then
+    for env_file in $(ls -1 $HOME/.env.d/*.env); do
+      source $env_file
+    done
+fi
+
+if [ -f "$HOME/.path.d/*.path" ] ; then
     for path_file in $(ls -1 $HOME/.path.d/*.path); do
       source $path_file
     done

@@ -1,38 +1,38 @@
 .PHONY: all
 
-all: ~/.bashrc ~/.bash_profile ~/.bashrc.d ~/.tmux.conf ~/.screenrc \
-	~/.gitconfig ~/bin ~/.ssh/config ~/.ssh/environment ~/.path.d
+all: ~/.bashrc ~/.bashrc_linux ~/.bashrc_darwin ~/.bash_profile \
+	~/.tmux.conf ~/.gitconfig  ~/.ssh/config ~/.ssh/environment \
+	~/.path.d
 
-~/.bashrc:
-	@ln -s .dotfiles/bashrc ~/.bashrc
+~/.bashrc: bashrc
+	@install -m 0644 $? $@
 
-~/.bash_profile:
-	@ln -s .dotfiles/bash_profile ~/.bash_profile
+~/.bashrc_darwin: bashrc_darwin
+	@install -m 0644 $? $@
 
-~/.bash_aliases:
-	@ln -s .dotfiles/bash_aliases ~/.bash_aliases
+~/.bashrc_linux: bashrc_linux
+	@install -m 0644 $? $@
 
-~/.bashrc.d:
-	@ln -s .dotfiles/bashrc.d ~/.bashrc.d
+~/.bash_profile: bash_profile
+	@install -m 0644 $? $@
+
+~/.bash_aliases: bash_aliases
+	@install -m 0644 $? $@
+
+~/.tmux.conf: tmux.conf
+	@install -m 0644 $? $@
+
+~/.gitconfig: gitconfig
+	@install -m 0644 $? $@
+
+~/.ssh/config: ssh/config
+	@install -m 0644 $? $@
+
+~/.ssh/environment: ssh/environment
+	@install -m 0644 $? $@
 
 ~/.path.d:
-	@ln -s .dotfiles/path.d ~/.path.d
+	@install -d -m 0755 $@
 
-~/.tmux.conf:
-	@ln -s .dotfiles/tmux.conf ~/.tmux.conf
-
-~/.screenrc:
-	@ln -s .dotfiles/screenrc ~/.screenrc
-
-~/.gitconfig:
-	@ln -s .dotfiles/gitconfig ~/.gitconfig
-
-~/bin:
-	@ln -s .dotfiles/bin ~/bin
-
-~/.ssh/config:
-	@test -L ~/.ssh/config || ln -s .dotfiles/ssh/config ~/.ssh/config
-
-~/.ssh/environment:
-	@test -L ~/.ssh/environment \
-		|| ln -s .dotfiles/ssh/environment ~/.ssh/environment
+~/.env.d:
+	@install -d -m 0755 $@
