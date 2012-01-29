@@ -1,5 +1,5 @@
 # ~/.bashrc
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
