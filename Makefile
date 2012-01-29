@@ -1,8 +1,9 @@
 .PHONY: all
 
 all: ~/.bashrc ~/.bashrc_linux ~/.bashrc_darwin ~/.bash_profile \
-	~/.tmux.conf ~/.gitconfig  ~/.ssh/config ~/.ssh/environment \
-	~/.path.d ~/.env.d ~/.path.d/stub.sh ~/.env.d/stub.sh
+	~/.bash_aliases ~/.tmux.conf ~/.gitconfig  ~/.ssh/config \
+	~/.ssh/environment  ~/.path.d ~/.env.d ~/.path.d/stub.sh \
+	~/.env.d/stub.sh
 
 ~/.bashrc: bashrc
 	@install -m 0644 $? $@
