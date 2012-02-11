@@ -1,6 +1,10 @@
 # ~/.bashrc
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 
+# editor defaults
+export EDITOR=vim
+export VISUAL=vim
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

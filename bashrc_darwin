@@ -15,8 +15,6 @@ else
 fi
 
 export PATH=$PYBINPATH:$RBBINPATH:$PATH
-export EDITOR=mvim
-export VISUAL=mvim
 export DISPLAY=:0.0
 export CLICOLOR=1
 export LSCOLORS=dxfxcxdxbxegedabagacad
