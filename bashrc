@@ -1,28 +1,8 @@
 # ~/.bashrc
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 
-# editor defaults
-export EDITOR=vim
-export VISUAL=vim
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
-UNAME=$(uname)
-if [[ "$UNAME" == "Darwin" ]] ; then
-    if [ -f ~/.bashrc_darwin ]; then
-        source  ~/.bashrc_darwin
-    fi
-fi
-
-if [[ "$UNAME" == "Linux" ]] ; then
-    if [ -f ~/.bashrc_linux ]; then
-        source  ~/.bashrc_linux
-    fi
-fi
-if [ -f ~/.bashrc_local ]; then
-    source  ~/.bashrc_local
-fi
 
 # colors
 txtblk='\e[0;30m' # Black - Regular
@@ -129,4 +109,23 @@ if [ -d "$HOME/.path.d" ] ; then
     for path_file in $(ls -1 $HOME/.path.d/*.sh); do
       source $path_file
     done
+fi
+
+# editor defaults
+export GIT_EDITOR=vim
+export VISUAL=vim
+export EDITOR=vim
+export PAGER=less
+
+UNAME=$(uname)
+if [[ "$UNAME" == "Darwin" ]] ; then
+	export DISPLAY=:0.0
+	export CLICOLOR=1
+	export LSCOLORS=dxfxcxdxbxegedabagacad
+	
+	alias ll="ls -hGlrt"
+	alias la="ls -hGlrta"
+
+elif [[ "$UNAME" == "Linux" ]] ; then
+    alias ls='ls --color'
 fi
