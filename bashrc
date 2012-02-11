@@ -112,9 +112,8 @@ if [ -d "$HOME/.path.d" ] ; then
 fi
 
 # editor defaults
-export GIT_EDITOR=vim
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=vi
+export EDITOR=vi
 export PAGER=less
 
 UNAME=$(uname)
