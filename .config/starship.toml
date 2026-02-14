@@ -1,0 +1,62 @@
+# Starship Prompt — Tokyo Night theme
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$java\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[❯](bold #7aa2f7)"
+error_symbol = "[❯](bold #f7768e)"
+
+[directory]
+style = "bold #7aa2f7"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold #bb9af7"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold #e0af68"
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+style = "#e0af68"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#9ece6a"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#f7768e"
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#7dcfff"
+
+[java]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#f7768e"
+
+[cmd_duration]
+min_time = 2_000
+format = "[$duration]($style) "
+style = "bold #414868"

@@ -1,0 +1,34 @@
+[user]
+	name = Sean Plaice
+	email = splaice@gmail.com
+
+[core]
+	pager = delta
+	editor = vim
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = tokyonight_night
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
