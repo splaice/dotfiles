@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew:*)",
+      "Bash(/usr/bin/grep:*)",
+      "Bash(curl:*)",
+      "Bash(ln:*)",
+      "Bash(echo:*)",
+      "Bash(gh:*)",
+      "Bash(git *)"
+    ]
+  }
+}
