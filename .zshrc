@@ -1,3 +1,6 @@
+# ── PATH ──────────────────────────────────────────────
+export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
+
 # ── Secrets ──────────────────────────────────────────────
 [[ -f ~/.env ]] && source ~/.env
 
@@ -52,5 +55,12 @@ alias diff='delta'
   print "  ${green}z${reset}      zoxide (smart cd)     ${dim}Ctrl+R${reset} atuin history"
   print "  ${green}lg${reset}     lazygit               ${dim}Ctrl+T${reset} fzf file picker"
   print "  ${purple}tldr${reset}   simplified man pages"
+  print "  ${dim}──────────────────────────────────────${reset}"
+  print "  ${cyan}Vim Plugins${reset}  ${dim}(all default keys)${reset}"
+  print "  ${dim}──────────────────────────────────────${reset}"
+  print "  ${yellow}gc${reset}     comment (visual/motion) ${dim}commentary${reset}"
+  print "  ${yellow}cs/ds/ys${reset} change/del/add surrounds ${dim}surround${reset}"
+  print "  ${green}:Files${reset} fzf file picker         ${dim}:Rg${reset} fzf search"
+  print "  ${green}:Git${reset}   fugitive git             ${dim}:GBrowse${reset} open in GH"
   print ""
 }
