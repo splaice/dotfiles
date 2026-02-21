@@ -32,35 +32,53 @@ eval "$(direnv hook zsh)"
 alias ls='eza --icons'
 alias ll='eza -la --icons --git'
 alias lt='eza --tree --icons --level=2'
+alias lls='eza -la --sort=modified -r'
 alias cat='bat'
 alias grep='rg'
 alias find='fd'
 alias lg='lazygit'
 alias diff='delta'
+alias o='open'
 
-# ── MOTD — new shell cheatsheet ────────────────────────
+# ── MOTD — Cyberdeck Shell Interface ──────────────────
 () {
-  local dim=$'\e[2m' cyan=$'\e[36m' yellow=$'\e[33m' green=$'\e[32m' purple=$'\e[35m' reset=$'\e[0m'
+  local R=$'\e[0m'
+  local DIM=$'\e[2m'
+  local BOLD=$'\e[1m'
+  local CYAN=$'\e[38;2;125;207;255m'
+  local MAGENTA=$'\e[38;2;187;154;247m'
+  local PINK=$'\e[38;2;247;118;142m'
+  local YELLOW=$'\e[38;2;224;175;104m'
+  local GREEN=$'\e[38;2;158;206;106m'
+  local BLUE=$'\e[38;2;122;162;247m'
+  local GREY=$'\e[38;2;65;72;104m'
+  local WHITE=$'\e[38;2;192;202;245m'
+
   print ""
-  print "  ${cyan}Modern Shell Cheatsheet${reset}"
-  print "  ${dim}──────────────────────────────────────${reset}"
-  print "  ${yellow}ls${reset}     eza --icons          ${dim}(was ls)${reset}"
-  print "  ${yellow}ll${reset}     eza -la --icons --git ${dim}(was ls -la)${reset}"
-  print "  ${yellow}lt${reset}     eza --tree --level=2  ${dim}(was tree)${reset}"
-  print "  ${yellow}cat${reset}    bat (syntax highlight) ${dim}(was cat)${reset}"
-  print "  ${yellow}grep${reset}   ripgrep              ${dim}(was grep)${reset}"
-  print "  ${yellow}find${reset}   fd                   ${dim}(was find)${reset}"
-  print "  ${yellow}diff${reset}   delta (side-by-side) ${dim}(was diff)${reset}"
-  print "  ${dim}──────────────────────────────────────${reset}"
-  print "  ${green}z${reset}      zoxide (smart cd)     ${dim}Ctrl+R${reset} atuin history"
-  print "  ${green}lg${reset}     lazygit               ${dim}Ctrl+T${reset} fzf file picker"
-  print "  ${purple}tldr${reset}   simplified man pages"
-  print "  ${dim}──────────────────────────────────────${reset}"
-  print "  ${cyan}Vim Plugins${reset}  ${dim}(all default keys)${reset}"
-  print "  ${dim}──────────────────────────────────────${reset}"
-  print "  ${yellow}gc${reset}     comment (visual/motion) ${dim}commentary${reset}"
-  print "  ${yellow}cs/ds/ys${reset} change/del/add surrounds ${dim}surround${reset}"
-  print "  ${green}:Files${reset} fzf file picker         ${dim}:Rg${reset} fzf search"
-  print "  ${green}:Git${reset}   fugitive git             ${dim}:GBrowse${reset} open in GH"
+  print "  ${MAGENTA}${BOLD}┌──────────────────────────────────────────────────────┐${R}"
+  print "  ${MAGENTA}${BOLD}│${R}  ${CYAN}${BOLD}▓▓▓${R} ${WHITE}${BOLD}CYBERDECK SHELL INTERFACE${R}         ${DIM}${GREY}v2.0 // online${R}"
+  print "  ${MAGENTA}${BOLD}└──────────────────────────────────────────────────────┘${R}"
+  print ""
+  print "  ${BLUE}${BOLD}┌─ UPGRADED COMMANDS ─────────────────────────────────${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ls${R}       ${WHITE}eza --icons${R}               ${DIM}${GREY}was ls${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ll${R}       ${WHITE}eza -la --icons --git${R}     ${DIM}${GREY}was ls -la${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}lt${R}       ${WHITE}eza --tree --level=2${R}      ${DIM}${GREY}was tree${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}cat${R}      ${WHITE}bat (syntax highlight)${R}    ${DIM}${GREY}was cat${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}grep${R}     ${WHITE}ripgrep${R}                   ${DIM}${GREY}was grep${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}find${R}     ${WHITE}fd${R}                        ${DIM}${GREY}was find${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}diff${R}     ${WHITE}delta (side-by-side)${R}      ${DIM}${GREY}was diff${R}"
+  print "  ${BLUE}${BOLD}│${R}"
+  print "  ${BLUE}${BOLD}├─ NAVIGATION ───────────────────────────────────────${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${GREEN}z${R}        ${WHITE}zoxide (smart cd)${R}          ${MAGENTA}Ctrl+R${R}  ${DIM}${WHITE}atuin history${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${GREEN}lg${R}       ${WHITE}lazygit${R}                    ${MAGENTA}Ctrl+T${R}  ${DIM}${WHITE}fzf file picker${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${GREEN}o${R}        ${WHITE}open (macOS)${R}               ${MAGENTA}tldr${R}    ${DIM}${WHITE}simplified man${R}"
+  print "  ${BLUE}${BOLD}│${R}"
+  print "  ${BLUE}${BOLD}├─ VIM PLUGINS ──────────────────────${DIM}${GREY} default keys ${R}${BLUE}${BOLD}─${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}gc${R}       ${WHITE}comment (visual/motion)${R}   ${DIM}${GREY}commentary${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}cs/ds/ys${R} ${WHITE}change/del/add surrounds${R}  ${DIM}${GREY}surround${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${GREEN}:Files${R}   ${WHITE}fzf file picker${R}            ${GREEN}:Rg${R}     ${DIM}${WHITE}fzf search${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${GREEN}:Git${R}     ${WHITE}fugitive git${R}               ${GREEN}:Ex${R}     ${DIM}${WHITE}file browser${R}"
+  print "  ${BLUE}${BOLD}│${R}"
+  print "  ${BLUE}${BOLD}└──────────────────────────────────────────────────────${R}"
   print ""
 }
