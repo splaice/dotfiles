@@ -37,6 +37,7 @@ LINKS=(
   ".config/starship.toml:$HOME/.config/starship.toml"
   ".config/ghostty/config:$HOME/.config/ghostty/config"
   ".config/bat/config:$HOME/.config/bat/config"
+  ".config/tmux/tmux.conf:$HOME/.config/tmux/tmux.conf"
 )
 
 # ── Counters ────────────────────────────────────────────────

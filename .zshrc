@@ -40,6 +40,7 @@ alias grep='rg'
 alias lg='lazygit'
 alias diff='delta'
 alias o='open'
+alias tclaude='~/Code/dotfiles/bin/tclaude'
 
 # ── MOTD — Cyberdeck Shell Interface ──────────────────
 () {

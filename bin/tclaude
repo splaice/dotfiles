@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# ╔═══════════════════════════════════════════════════════════╗
+# ║  TCLAUDE — Claude Code Workspace Launcher                 ║
+# ║  Cyberdeck Development Environment                         ║
+# ╚═══════════════════════════════════════════════════════════╝
+#
+# Layout:
+# ┌──────────────────┬──────────────────┐
+# │                  │                  │
+# │   Claude Code    │      Vim         │
+# │     (CLI)        │    (editor)      │
+# │                  │                  │
+# ├──────────────────┴──────────────────┤
+# │           Shell (commands)          │
+# └─────────────────────────────────────┘
+
+set -euo pipefail
+
+SESSION="claude"
+
+# If already inside this tmux session, don't nest
+if [[ "${TMUX:-}" != "" ]]; then
+  echo "Already inside tmux. Use 'tmux kill-session -t $SESSION' to restart."
+  exit 1
+fi
+
+# Attach if session already exists
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+  exec tmux attach-session -t "$SESSION"
+fi
+
+# Create new session — top-left pane (will run claude)
+tmux new-session -d -s "$SESSION" -x "$(tput cols)" -y "$(tput lines)"
+
+# Split horizontally: top and bottom (bottom pane = shell)
+# -p 30 gives bottom pane 30% of height
+tmux split-window -v -t "$SESSION" -p 30
+
+# Go back to top pane and split vertically: left (claude) and right (vim)
+tmux select-pane -t "$SESSION:.1"
+tmux split-window -h -t "$SESSION" -p 50
+
+# Now panes are:
+#   .1 = top-left  (claude)
+#   .2 = top-right (vim)
+#   .3 = bottom    (shell)
+
+# Launch vim in top-right pane
+tmux send-keys -t "$SESSION:.2" 'vim' C-m
+
+# Launch claude in top-left pane
+tmux send-keys -t "$SESSION:.1" 'claude' C-m
+
+# Focus the bottom shell pane
+tmux select-pane -t "$SESSION:.3"
+
+# Attach
+exec tmux attach-session -t "$SESSION"

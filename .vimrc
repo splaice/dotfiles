@@ -24,6 +24,9 @@ Plug 'airblade/vim-gitgutter'
 Plug '/opt/homebrew/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
+" File browser
+Plug 'preservim/nerdtree'
+
 " EditorConfig support
 Plug 'editorconfig/editorconfig-vim'
 
@@ -133,10 +136,15 @@ let g:fzf_layout = { 'down': '40%' }
 " Use fd for file listing (respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
 
-" ── Netrw (built-in file browser) ────────────────────────
-let g:netrw_banner = 0               " hide banner
-let g:netrw_liststyle = 3            " tree view
-let g:netrw_winsize = 25             " 25% width
+" :F as shortcut for :Files
+command! -nargs=? -complete=dir F Files <args>
+
+" ── NERDTree ─────────────────────────────────────────────
+let g:NERDTreeShowHidden = 1         " show dotfiles
+let g:NERDTreeMinimalUI = 1          " hide help text
+let g:NERDTreeWinSize = 30
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " ── Filetype ─────────────────────────────────────────────
 filetype plugin indent on
