@@ -38,6 +38,12 @@ set autoread                         " reload files changed outside vim
 set backspace=indent,eol,start
 set mouse=a                          " mouse in all modes
 set clipboard=unnamed                " use system clipboard
+
+" Delete without clobbering the clipboard
+nnoremap d "_d
+nnoremap dd "_dd
+nnoremap D "_D
+xnoremap d "_d
 set updatetime=250                   " faster gitgutter + CursorHold
 set ttimeoutlen=10                   " snappy mode switching
 set signcolumn=yes                   " always show sign column

@@ -1,5 +1,7 @@
 # ── PATH ──────────────────────────────────────────────
 export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
+export PATH="/opt/homebrew/bin/go:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # ── Secrets ──────────────────────────────────────────────
 [[ -f ~/.env ]] && source ~/.env
@@ -29,13 +31,12 @@ eval "$(atuin init zsh)"
 eval "$(direnv hook zsh)"
 
 # ── Aliases ─────────────────────────────────────────────
-alias ls='eza --icons'
-alias ll='eza -la --icons --git'
-alias lt='eza --tree --icons --level=2'
+alias ls='eza'
+alias ll='eza -la --git'
+alias lt='eza --tree --level=2'
 alias lls='eza -la --sort=modified -r'
 alias cat='bat'
 alias grep='rg'
-alias find='fd'
 alias lg='lazygit'
 alias diff='delta'
 alias o='open'
@@ -60,8 +61,8 @@ alias o='open'
   print "  ${MAGENTA}${BOLD}└──────────────────────────────────────────────────────┘${R}"
   print ""
   print "  ${BLUE}${BOLD}┌─ UPGRADED COMMANDS ─────────────────────────────────${R}"
-  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ls${R}       ${WHITE}eza --icons${R}               ${DIM}${GREY}was ls${R}"
-  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ll${R}       ${WHITE}eza -la --icons --git${R}     ${DIM}${GREY}was ls -la${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ls${R}       ${WHITE}eza ${R}               ${DIM}${GREY}was ls${R}"
+  print "  ${BLUE}${BOLD}│${R}  ${YELLOW}ll${R}       ${WHITE}eza -la --git${R}     ${DIM}${GREY}was ls -la${R}"
   print "  ${BLUE}${BOLD}│${R}  ${YELLOW}lt${R}       ${WHITE}eza --tree --level=2${R}      ${DIM}${GREY}was tree${R}"
   print "  ${BLUE}${BOLD}│${R}  ${YELLOW}cat${R}      ${WHITE}bat (syntax highlight)${R}    ${DIM}${GREY}was cat${R}"
   print "  ${BLUE}${BOLD}│${R}  ${YELLOW}grep${R}     ${WHITE}ripgrep${R}                   ${DIM}${GREY}was grep${R}"

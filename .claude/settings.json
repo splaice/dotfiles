@@ -7,7 +7,9 @@
       "Bash(ln:*)",
       "Bash(echo:*)",
       "Bash(gh:*)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(chmod:*)",
+      "Bash(/Users/splaice/Code/dotfiles/link.sh)"
     ]
   }
 }
