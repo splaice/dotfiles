@@ -16,7 +16,9 @@
 
 set -euo pipefail
 
-SESSION="claude"
+# Derive session name from CWD — replace dots/colons with underscores for tmux
+WORK_DIR="$(pwd)"
+SESSION="claude-$(basename "$WORK_DIR" | tr './:' '___')"
 
 # If already inside this tmux session, don't nest
 if [[ "${TMUX:-}" != "" ]]; then
@@ -24,21 +26,21 @@ if [[ "${TMUX:-}" != "" ]]; then
   exit 1
 fi
 
-# Attach if session already exists
+# Attach if a session for this directory already exists
 if tmux has-session -t "$SESSION" 2>/dev/null; then
   exec tmux attach-session -t "$SESSION"
 fi
 
 # Create new session — top-left pane (will run claude)
-tmux new-session -d -s "$SESSION" -x "$(tput cols)" -y "$(tput lines)"
+tmux new-session -d -s "$SESSION" -c "$WORK_DIR" -x "$(tput cols)" -y "$(tput lines)"
 
 # Split horizontally: top and bottom (bottom pane = shell)
 # -p 30 gives bottom pane 30% of height
-tmux split-window -v -t "$SESSION" -p 30
+tmux split-window -v -t "$SESSION" -c "$WORK_DIR" -p 30
 
 # Go back to top pane and split vertically: left (claude) and right (vim)
 tmux select-pane -t "$SESSION:.1"
-tmux split-window -h -t "$SESSION" -p 50
+tmux split-window -h -t "$SESSION" -c "$WORK_DIR" -p 50
 
 # Now panes are:
 #   .1 = top-left  (claude)

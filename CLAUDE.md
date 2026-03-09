@@ -29,7 +29,7 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 | `.config/ghostty/config` | `~/.config/ghostty/config` |
 | `.config/bat/config` | `~/.config/bat/config` |
 
-When adding a new dotfile to the repo, also add it to the `LINKS` array in `link.sh`.
+When adding a new dotfile to the repo, also add it to the `LINKS` array in `link.sh`. When adding a new tool dependency, add it to the `TOOLS`, `FONTS`, or `APPS` array in `tools.sh`.
 
 ## Key Files
 
@@ -40,6 +40,7 @@ When adding a new dotfile to the repo, also add it to the `LINKS` array in `link
 - **`.config/ghostty/config`** — terminal: Tokyo Night palette, JetBrainsMono Nerd Font, bar cursor
 - **`.config/bat/config`** — syntax highlighting with tokyonight_night theme
 - **`link.sh`** — symlink integrity scanner/repairer with cyberpunk UI (run `./link.sh` to verify all links)
+- **`tools.sh`** — dependency tracker that verifies all required CLI tools, fonts, and apps are installed (run `./tools.sh` to check; offers to install missing via Homebrew)
 
 ## Vim Plugins (managed by vim-plug)
 
@@ -54,6 +55,7 @@ Plugins live in `~/.vim/plugged/` (not tracked in this repo). Run `:PlugInstall`
 ```sh
 git clone git@github.com:splaice/dotfiles.git ~/Code/dotfiles
 cd ~/Code/dotfiles
+./tools.sh         # checks & installs required tools
 ./link.sh          # creates all symlinks
 vim +PlugInstall   # installs vim plugins
 ```
