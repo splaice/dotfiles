@@ -42,6 +42,9 @@ TOOLS=(
   "lazygit:lazygit:.zshrc"
   "delta:git-delta:.gitconfig .zshrc"
   "rtk:rtk:claude-code"
+  "glow:glow:"
+  "chafa:chafa:"
+  "ranger:ranger:"
 )
 
 FONTS=(
