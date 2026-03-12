@@ -28,8 +28,13 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 | `.config/starship.toml` | `~/.config/starship.toml` |
 | `.config/ghostty/config` | `~/.config/ghostty/config` |
 | `.config/bat/config` | `~/.config/bat/config` |
+| `.config/tmux/tmux.conf` | `~/.config/tmux/tmux.conf` |
+| `.config/ranger/scope.sh` | `~/.config/ranger/scope.sh` |
+| `.config/ranger/rifle.conf` | `~/.config/ranger/rifle.conf` |
 
 When adding a new dotfile to the repo, also add it to the `LINKS` array in `link.sh`. When adding a new tool dependency, add it to the `TOOLS`, `FONTS`, or `APPS` array in `tools.sh`.
+
+**Important:** Never copy files directly between `~/.config/` and the repo. All config files live in the repo and are symlinked to their target locations by `link.sh`. To add a new config: create it in the repo, add a `LINKS` entry, and run `./link.sh`.
 
 ## Key Files
 
@@ -39,6 +44,8 @@ When adding a new dotfile to the repo, also add it to the `LINKS` array in `link
 - **`.config/starship.toml`** — prompt with git branch/status, language versions, Tokyo Night colors, Nerd Font icons
 - **`.config/ghostty/config`** — terminal: Tokyo Night palette, JetBrainsMono Nerd Font, bar cursor
 - **`.config/bat/config`** — syntax highlighting with tokyonight_night theme
+- **`.config/ranger/scope.sh`** — preview script; uses glow for markdown rendering
+- **`.config/ranger/rifle.conf`** — file opener config; glow as default for markdown, vim as fallback
 - **`link.sh`** — symlink integrity scanner/repairer with cyberpunk UI (run `./link.sh` to verify all links)
 - **`tools.sh`** — dependency tracker that verifies all required CLI tools, fonts, and apps are installed (run `./tools.sh` to check; offers to install missing via Homebrew)
 
