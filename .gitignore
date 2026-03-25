@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
 *.swo
+.ssh/config.d/private
 
 ! .claude/settings.local.json

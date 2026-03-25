@@ -41,6 +41,24 @@ alias lg='lazygit'
 alias diff='delta'
 alias o='open'
 alias tclaude='~/Code/dotfiles/bin/tclaude'
+alias a='cd ~/Agents'
+alias c='cd ~/Code'
+alias d='cd ~/Data'
+alias o='open'
+
+# ── Hooks ─────────────────────────────────────────────
+# Auto-rename cmux workspace when cd'ing into a Claude project
+function _cmux_auto_rename() {
+  if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
+    cmux rename-workspace "${SHELL##*/}" 2>&1 >/dev/null
+  fi
+}
+
+if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
+  autoload -Uz add-zsh-hook
+  add-zsh-hook chpwd _cmux_auto_rename
+  _cmux_auto_rename  # run once on shell start too
+fi
 
 # ── MOTD — Cyberdeck Shell Interface ──────────────────
 () {
@@ -84,3 +102,6 @@ alias tclaude='~/Code/dotfiles/bin/tclaude'
   print "  ${BLUE}${BOLD}└──────────────────────────────────────────────────────${R}"
   print ""
 }
+
+# Added by tally installer
+export PATH="$HOME/.tally/bin:$PATH"
