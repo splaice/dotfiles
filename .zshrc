@@ -46,6 +46,64 @@ alias c='cd ~/Code'
 alias d='cd ~/Data'
 alias o='open'
 
+# ── SSH Remote Colors ─────────────────────────────────
+# Swaps to a red/orange "Ember" palette when SSH'd into a remote host,
+# then restores Tokyo Night on disconnect.
+_ssh_ember_theme() {
+  # bg / fg / cursor
+  printf '\e]11;#1c1210\e\\'
+  printf '\e]10;#d8c4b0\e\\'
+  printf '\e]12;#ff8c42\e\\'
+  # palette 0-15
+  printf '\e]4;0;#1a1410\e\\'
+  printf '\e]4;1;#ff6b6b\e\\'
+  printf '\e]4;2;#b8a84a\e\\'
+  printf '\e]4;3;#e89048\e\\'
+  printf '\e]4;4;#d47850\e\\'
+  printf '\e]4;5;#c86878\e\\'
+  printf '\e]4;6;#e09860\e\\'
+  printf '\e]4;7;#b8a898\e\\'
+  printf '\e]4;8;#4a3830\e\\'
+  printf '\e]4;9;#ff8888\e\\'
+  printf '\e]4;10;#d0bc5c\e\\'
+  printf '\e]4;11;#f0a460\e\\'
+  printf '\e]4;12;#e09068\e\\'
+  printf '\e]4;13;#d87888\e\\'
+  printf '\e]4;14;#f0b070\e\\'
+  printf '\e]4;15;#e8d4c0\e\\'
+}
+
+_ssh_tokyonight_theme() {
+  # bg / fg / cursor
+  printf '\e]11;#1a1b26\e\\'
+  printf '\e]10;#c0caf5\e\\'
+  printf '\e]12;#c0caf5\e\\'
+  # palette 0-15
+  printf '\e]4;0;#15161e\e\\'
+  printf '\e]4;1;#f7768e\e\\'
+  printf '\e]4;2;#9ece6a\e\\'
+  printf '\e]4;3;#e0af68\e\\'
+  printf '\e]4;4;#7aa2f7\e\\'
+  printf '\e]4;5;#bb9af7\e\\'
+  printf '\e]4;6;#7dcfff\e\\'
+  printf '\e]4;7;#a9b1d6\e\\'
+  printf '\e]4;8;#414868\e\\'
+  printf '\e]4;9;#f7768e\e\\'
+  printf '\e]4;10;#9ece6a\e\\'
+  printf '\e]4;11;#e0af68\e\\'
+  printf '\e]4;12;#7aa2f7\e\\'
+  printf '\e]4;13;#bb9af7\e\\'
+  printf '\e]4;14;#7dcfff\e\\'
+  printf '\e]4;15;#c0caf5\e\\'
+}
+
+_ssh_color_wrap() {
+  _ssh_ember_theme
+  command ssh "$@"
+  _ssh_tokyonight_theme
+}
+alias ssh='_ssh_color_wrap'
+
 # ── Hooks ─────────────────────────────────────────────
 # Auto-rename cmux workspace when cd'ing into a Claude project
 #function _cmux_auto_rename() {
