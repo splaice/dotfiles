@@ -103,13 +103,19 @@ endif
 
 " ── Theme ────────────────────────────────────────────────
 set termguicolors
-let g:tokyonight_style = 'night'
-let g:tokyonight_enable_italic = 1
-silent! colorscheme tokyonight
+if !empty($SSH_CONNECTION)
+  silent! colorscheme ember
+  let s:lightline_theme = 'wombat'
+else
+  let g:tokyonight_style = 'night'
+  let g:tokyonight_enable_italic = 1
+  silent! colorscheme tokyonight
+  let s:lightline_theme = 'tokyonight'
+endif
 
 " ── Lightline ────────────────────────────────────────────
 let g:lightline = {
-      \ 'colorscheme': 'tokyonight',
+      \ 'colorscheme': s:lightline_theme,
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['gitbranch', 'readonly', 'filename', 'modified'] ],

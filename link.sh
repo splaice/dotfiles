@@ -40,6 +40,7 @@ LINKS=(
   ".config/bat/config:$HOME/.config/bat/config"
   ".config/tmux/tmux.conf:$HOME/.config/tmux/tmux.conf"
   ".config/tmux/tmux-ember.conf:$HOME/.config/tmux/tmux-ember.conf"
+  ".vim/colors/ember.vim:$HOME/.vim/colors/ember.vim"
   ".config/ranger/scope.sh:$HOME/.config/ranger/scope.sh"
   ".config/ranger/rifle.conf:$HOME/.config/ranger/rifle.conf"
 )
