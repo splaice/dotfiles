@@ -29,6 +29,7 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 | `.config/ghostty/config` | `~/.config/ghostty/config` |
 | `.config/bat/config` | `~/.config/bat/config` |
 | `.config/tmux/tmux.conf` | `~/.config/tmux/tmux.conf` |
+| `.config/tmux/tmux-ember.conf` | `~/.config/tmux/tmux-ember.conf` |
 | `.config/ranger/scope.sh` | `~/.config/ranger/scope.sh` |
 | `.config/ranger/rifle.conf` | `~/.config/ranger/rifle.conf` |
 
@@ -43,6 +44,7 @@ When adding a new dotfile to the repo, also add it to the `LINKS` array in `link
 - **`.gitconfig`** — delta as pager (side-by-side), vim as editor, pull rebase, auto stash
 - **`.config/starship.toml`** — prompt with git branch/status, language versions, Tokyo Night colors, Nerd Font icons
 - **`.config/ghostty/config`** — terminal: Tokyo Night palette, JetBrainsMono Nerd Font, bar cursor
+- **`.config/tmux/tmux-ember.conf`** — red/orange tmux theme, auto-loaded via `tmux()` wrapper when in an SSH session (`$SSH_CONNECTION` set)
 - **`.config/bat/config`** — syntax highlighting with tokyonight_night theme
 - **`.config/ranger/scope.sh`** — preview script; uses glow for markdown rendering
 - **`.config/ranger/rifle.conf`** — file opener config; glow as default for markdown, vim as fallback

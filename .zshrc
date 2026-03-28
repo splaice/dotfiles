@@ -104,6 +104,15 @@ _ssh_color_wrap() {
 }
 alias ssh='_ssh_color_wrap'
 
+# Auto-select ember tmux config when in an SSH session
+tmux() {
+  if [[ -n "$SSH_CONNECTION" && -f ~/.config/tmux/tmux-ember.conf ]]; then
+    command tmux -f ~/.config/tmux/tmux-ember.conf "$@"
+  else
+    command tmux "$@"
+  fi
+}
+
 # ── Hooks ─────────────────────────────────────────────
 # Auto-rename cmux workspace when cd'ing into a Claude project
 #function _cmux_auto_rename() {
