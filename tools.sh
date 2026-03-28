@@ -187,6 +187,53 @@ done
 echo "  ${BLUE}${BOLD}│${R}"
 echo "  ${BLUE}${BOLD}└──────────────────────────────────────────────────────${R}"
 
+# ── Vim Setup ──────────────────────────────────────────────────
+echo ""
+echo "  ${BLUE}${BOLD}┌─ VIM PLUGINS ───────────────────────────────────────${R}"
+echo "  ${BLUE}${BOLD}│${R}  ${DIM}${WHITE}vim-plug manager and plugin installation${R}"
+echo "  ${BLUE}${BOLD}│${R}"
+
+VIM_PLUG="$HOME/.vim/autoload/plug.vim"
+VIM_PLUGGED="$HOME/.vim/plugged"
+VIM_NEEDS_INSTALL=false
+
+scan_line "vim-plug"
+if [[ -f "$VIM_PLUG" ]]; then
+  printf "${BG_GREEN} ${GREEN}${BOLD}OK${R}\n"
+else
+  printf "${BG_RED} ${PINK}${BOLD}MISSING${R}\n"
+  VIM_NEEDS_INSTALL=true
+fi
+
+scan_line "plugins"
+if [[ -d "$VIM_PLUGGED" ]] && [[ -n "$(ls -A "$VIM_PLUGGED" 2>/dev/null)" ]]; then
+  plugin_count=$(ls -1 "$VIM_PLUGGED" 2>/dev/null | wc -l | tr -d ' ')
+  printf "${BG_GREEN} ${GREEN}${BOLD}OK${R}  ${DIM}${GREY}${plugin_count} plugins${R}\n"
+else
+  printf "${BG_RED} ${PINK}${BOLD}MISSING${R}\n"
+  VIM_NEEDS_INSTALL=true
+fi
+
+if $VIM_NEEDS_INSTALL; then
+  echo "  ${BLUE}${BOLD}│${R}"
+  printf "  ${BLUE}${BOLD}│${R}  ${WHITE}${BOLD}Install vim-plug and plugins? ${DIM}[y/N]${R} "
+  read -r vim_answer
+  if [[ "$vim_answer" =~ ^[Yy]$ ]]; then
+    if [[ ! -f "$VIM_PLUG" ]]; then
+      echo "  ${BLUE}${BOLD}│${R}  ${MAGENTA}▸${R} ${WHITE}Installing vim-plug${R}"
+      curl -fLo "$VIM_PLUG" --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 2>/dev/null
+      echo "  ${BLUE}${BOLD}│${R}  ${GREEN}✓${R} ${WHITE}vim-plug installed${R}"
+    fi
+    echo "  ${BLUE}${BOLD}│${R}  ${MAGENTA}▸${R} ${WHITE}Installing plugins (vim +PlugInstall)${R}"
+    vim +PlugInstall +qall 2>/dev/null
+    echo "  ${BLUE}${BOLD}│${R}  ${GREEN}✓${R} ${WHITE}plugins installed${R}"
+  fi
+fi
+
+echo "  ${BLUE}${BOLD}│${R}"
+echo "  ${BLUE}${BOLD}└──────────────────────────────────────────────────────${R}"
+
 # ── Results ──────────────────────────────────────────────────
 echo ""
 
