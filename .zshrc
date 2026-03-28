@@ -31,10 +31,10 @@ eval "$(atuin init zsh)"
 eval "$(direnv hook zsh)"
 
 # ── Aliases ─────────────────────────────────────────────
-alias ls='eza'
-alias ll='eza -la --git'
+alias ls='eza --time-style=long-iso'
+alias ll='eza -la --git --time-style=long-iso'
 alias lt='eza --tree --level=2'
-alias lls='eza -la --sort=modified -r'
+alias lls='eza -la --sort=modified -r --time-style=long-iso'
 alias cat='bat'
 alias grep='rg'
 alias lg='lazygit'
@@ -48,17 +48,21 @@ alias o='open'
 
 # ── Hooks ─────────────────────────────────────────────
 # Auto-rename cmux workspace when cd'ing into a Claude project
-function _cmux_auto_rename() {
-  if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
-    cmux rename-workspace "${SHELL##*/}" 2>&1 >/dev/null
-  fi
-}
+#function _cmux_auto_rename() {
+#  if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
+#    cmux rename-workspace "${SHELL##*/}" 2>&1 >/dev/null
+#  fi
+#}
+#
+#if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
+#  autoload -Uz add-zsh-hook
+#  add-zsh-hook chpwd _cmux_auto_rename
+#  _cmux_auto_rename  # run once on shell start too
+#fi
+#
 
-if [[ -n "$CMUX_WORKSPACE_ID" ]]; then
-  autoload -Uz add-zsh-hook
-  add-zsh-hook chpwd _cmux_auto_rename
-  _cmux_auto_rename  # run once on shell start too
-fi
+# reset term if busted
+printf '\e[>0u' 2>/dev/null
 
 # ── MOTD — Cyberdeck Shell Interface ──────────────────
 () {

@@ -43,3 +43,4 @@ window-inherit-working-directory = false
 copy-on-select = clipboard
 confirm-close-surface = false
 mouse-hide-while-typing = true
+shell-integration-features = ssh-terminfo,ssh-env
