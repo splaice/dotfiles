@@ -46,6 +46,7 @@ alias a='cd ~/Agents'
 alias c='cd ~/Code'
 alias d='cd ~/Data'
 alias o='open'
+alias claud='claude && reset'
 
 # ── SSH Remote Colors ─────────────────────────────────
 # Swaps to a red/orange "Ember" palette when SSH'd into a remote host,
