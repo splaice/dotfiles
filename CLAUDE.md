@@ -26,6 +26,7 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 | `.gitconfig` | `~/.gitconfig` |
 | `.ssh/config` | `~/.ssh/config` |
 | `.config/starship.toml` | `~/.config/starship.toml` |
+| `.config/starship-ember.toml` | `~/.config/starship-ember.toml` |
 | `.config/ghostty/config` | `~/.config/ghostty/config` |
 | `.config/bat/config` | `~/.config/bat/config` |
 | `.config/tmux/tmux.conf` | `~/.config/tmux/tmux.conf` |
@@ -44,6 +45,7 @@ When adding a new dotfile to the repo, also add it to the `LINKS` array in `link
 - **`.vimrc`** — Vim 9.1 config using vim-plug. Tokyo Night theme, lightline, fzf.vim, tpope essentials (commentary, surround, sleuth, fugitive, repeat), gitgutter, editorconfig. All default keybindings preserved — user is an experienced vi user
 - **`.gitconfig`** — delta as pager (side-by-side), vim as editor, pull rebase, auto stash
 - **`.config/starship.toml`** — prompt with git branch/status, language versions, Tokyo Night colors, Nerd Font icons
+- **`.config/starship-ember.toml`** — ember variant of starship prompt, auto-loaded via `STARSHIP_CONFIG` when `$SSH_CONNECTION` is set
 - **`.config/ghostty/config`** — terminal: Tokyo Night palette, JetBrainsMono Nerd Font, bar cursor
 - **`.config/tmux/tmux-ember.conf`** — red/orange tmux theme, auto-loaded via `tmux()` wrapper when in an SSH session (`$SSH_CONNECTION` set)
 - **`.vim/colors/ember.vim`** — red/orange vim colorscheme, auto-loaded by `.vimrc` when `$SSH_CONNECTION` is set

@@ -36,6 +36,7 @@ LINKS=(
   ".ssh/config:$HOME/.ssh/config"
   ".ssh/config.d/private:$HOME/.ssh/config.d/private"
   ".config/starship.toml:$HOME/.config/starship.toml"
+  ".config/starship-ember.toml:$HOME/.config/starship-ember.toml"
   ".config/ghostty/config:$HOME/.config/ghostty/config"
   ".config/bat/config:$HOME/.config/bat/config"
   ".config/tmux/tmux.conf:$HOME/.config/tmux/tmux.conf"

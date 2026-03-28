@@ -7,6 +7,7 @@ export PATH="$HOME/go/bin:$PATH"
 [[ -f ~/.env ]] && source ~/.env
 
 # ── Starship prompt ─────────────────────────────────────
+[[ -n "$SSH_CONNECTION" ]] && export STARSHIP_CONFIG=~/.config/starship-ember.toml
 eval "$(starship init zsh)"
 
 # ── Zoxide (smart cd) ──────────────────────────────────

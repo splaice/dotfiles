@@ -1,0 +1,62 @@
+# Starship Prompt — Ember theme (SSH remote sessions)
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$java\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[❯](bold #d47850)"
+error_symbol = "[❯](bold #ff6b6b)"
+
+[directory]
+style = "bold #d47850"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold #c86878"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold #e89048"
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+style = "#e89048"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#b8a84a"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#ff6b6b"
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#e09860"
+
+[java]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#ff6b6b"
+
+[cmd_duration]
+min_time = 2_000
+format = "[$duration]($style) "
+style = "bold #4a3830"
