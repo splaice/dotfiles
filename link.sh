@@ -44,6 +44,10 @@ LINKS=(
   ".vim/colors/ember.vim:$HOME/.vim/colors/ember.vim"
   ".config/ranger/scope.sh:$HOME/.config/ranger/scope.sh"
   ".config/ranger/rifle.conf:$HOME/.config/ranger/rifle.conf"
+  ".local/bin/git-backup.sh:$HOME/.local/bin/git-backup.sh"
+  ".local/bin/tar-backup.sh:$HOME/.local/bin/tar-backup.sh"
+  "launch-agent/com.splaice.backup-agents.plist:$HOME/Library/LaunchAgents/com.splaice.backup-agents.plist"
+  "launch-agent/com.splaice.backup-code.plist:$HOME/Library/LaunchAgents/com.splaice.backup-code.plist"
 )
 
 # ── Counters ────────────────────────────────────────────────

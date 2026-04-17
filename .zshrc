@@ -2,6 +2,7 @@
 export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
 export PATH="/opt/homebrew/bin/go:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # ── Secrets ──────────────────────────────────────────────
 [[ -f ~/.env ]] && source ~/.env
@@ -36,8 +37,8 @@ alias ls='eza --time-style=long-iso'
 alias ll='eza -la --git --time-style=long-iso'
 alias lt='eza --tree --level=2'
 alias lls='eza -la --sort=modified -r --time-style=long-iso'
-alias cat='bat'
-alias grep='rg'
+#alias cat='bat'
+#alias grep='rg'
 alias lg='lazygit'
 alias diff='delta'
 alias o='open'
@@ -47,6 +48,7 @@ alias c='cd ~/Code'
 alias d='cd ~/Data'
 alias o='open'
 alias claud='claude && reset'
+alias m='cd ~/Maniple'
 
 # ── SSH Remote Colors ─────────────────────────────────
 # Swaps to a red/orange "Ember" palette when SSH'd into a remote host,

@@ -34,6 +34,10 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 | `.vim/colors/ember.vim` | `~/.vim/colors/ember.vim` |
 | `.config/ranger/scope.sh` | `~/.config/ranger/scope.sh` |
 | `.config/ranger/rifle.conf` | `~/.config/ranger/rifle.conf` |
+| `.local/bin/git-backup.sh` | `~/.local/bin/git-backup.sh` |
+| `.local/bin/tar-backup.sh` | `~/.local/bin/tar-backup.sh` |
+| `launch-agent/com.splaice.backup-agents.plist` | `~/Library/LaunchAgents/com.splaice.backup-agents.plist` |
+| `launch-agent/com.splaice.backup-code.plist` | `~/Library/LaunchAgents/com.splaice.backup-code.plist` |
 
 When adding a new dotfile to the repo, also add it to the `LINKS` array in `link.sh`. When adding a new tool dependency, add it to the `TOOLS`, `FONTS`, or `APPS` array in `tools.sh`.
 
