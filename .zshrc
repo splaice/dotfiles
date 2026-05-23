@@ -49,6 +49,7 @@ alias d='cd ~/Data'
 alias o='open'
 alias claud='claude && reset'
 alias m='cd ~/Maniple'
+alias mosh='mosh --server=/opt/homebrew/bin/mosh-server'
 
 # ── SSH Remote Colors ─────────────────────────────────
 # Swaps to a red/orange "Ember" palette when SSH'd into a remote host,
