@@ -30,18 +30,23 @@ BG_CYAN=$'\e[48;2;15;30;50m'
 # ── Symlink Registry ────────────────────────────────────────
 # Format: "source:target"
 LINKS=(
-  ".zshrc:$HOME/.zshrc"
-  ".vimrc:$HOME/.vimrc"
+  ".bashrc:$HOME/.bashrc"
+  ".bash_profile:$HOME/.bash_profile"
   ".gitconfig:$HOME/.gitconfig"
   ".ssh/config:$HOME/.ssh/config"
   ".ssh/config.d/private:$HOME/.ssh/config.d/private"
-  ".config/starship.toml:$HOME/.config/starship.toml"
-  ".config/starship-ember.toml:$HOME/.config/starship-ember.toml"
   ".config/ghostty/config:$HOME/.config/ghostty/config"
-  ".config/bat/config:$HOME/.config/bat/config"
   ".config/tmux/tmux.conf:$HOME/.config/tmux/tmux.conf"
-  ".config/tmux/tmux-ember.conf:$HOME/.config/tmux/tmux-ember.conf"
-  ".vim/colors/ember.vim:$HOME/.vim/colors/ember.vim"
+  ".config/themes/tokyo-night:$HOME/.config/themes/tokyo-night"
+  ".config/themes/ember:$HOME/.config/themes/ember"
+  ".config/themes/catppuccin:$HOME/.config/themes/catppuccin"
+  ".config/themes/gruvbox:$HOME/.config/themes/gruvbox"
+  ".config/nvim/init.lua:$HOME/.config/nvim/init.lua"
+  ".config/nvim/lua/config/lazy.lua:$HOME/.config/nvim/lua/config/lazy.lua"
+  ".config/nvim/lua/config/options.lua:$HOME/.config/nvim/lua/config/options.lua"
+  ".config/nvim/lua/config/keymaps.lua:$HOME/.config/nvim/lua/config/keymaps.lua"
+  ".config/nvim/lua/plugins/colorscheme.lua:$HOME/.config/nvim/lua/plugins/colorscheme.lua"
+  ".config/nvim/colors/ember.vim:$HOME/.config/nvim/colors/ember.vim"
   ".config/ranger/scope.sh:$HOME/.config/ranger/scope.sh"
   ".config/ranger/rifle.conf:$HOME/.config/ranger/rifle.conf"
   ".local/bin/git-backup.sh:$HOME/.local/bin/git-backup.sh"
@@ -201,8 +206,21 @@ print_results() {
   echo ""
 }
 
+# ── Default theme (if none active) ──────────────────────────
+ensure_default_theme() {
+  local current="$HOME/.config/themes/current"
+  if [[ ! -L "$current" ]]; then
+    echo "  ${BLUE}${BOLD}┌─ THEME ─────────────────────────────────────────────${R}"
+    echo "  ${BLUE}${BOLD}│${R}  ${DIM}${WHITE}no active theme — defaulting to ${CYAN}tokyo-night${R}"
+    ln -sfn "tokyo-night" "$current"
+    echo "  ${BLUE}${BOLD}│${R}  ${GREEN}✓${R} ${WHITE}~/.config/themes/current → tokyo-night${R}"
+    echo "  ${BLUE}${BOLD}└──────────────────────────────────────────────────────${R}"
+  fi
+}
+
 # ── Run ─────────────────────────────────────────────────────
 clear_banner
 boot_sequence
 run_scan
+ensure_default_theme
 print_results

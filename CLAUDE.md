@@ -8,12 +8,36 @@ Sean Plaice (`splaice`)
 
 ## Design Principles
 
-- **Tokyo Night** color theme everywhere — terminal, prompt, fzf, bat, delta, vim, git
+- **Switchable themes** — Tokyo Night, Ember, Catppuccin, Gruvbox. Switch any time with `theme <name>`.
 - **Truecolor** (24-bit) throughout — all configs use `#rrggbb` or `38;2;r;g;b` escapes
 - **JetBrainsMono Nerd Font** — supports ligatures and icon glyphs
 - **Cyberpunk aesthetic** — MOTD and scripts use box-drawing, neon colors, animated spinners
-- **Modern CLI replacements** — eza, bat, ripgrep, fd, delta, zoxide, fzf, atuin, lazygit
+- **Modern CLI replacements** — eza, fd, delta, zoxide, fzf
 - Keep configs simple and minimal; avoid over-engineering
+
+## Theme System
+
+Themes live under `.config/themes/<name>/`. Each contains theme-specific files for the apps that participate:
+
+| File | Used by |
+|---|---|
+| `ghostty.conf` | included from `.config/ghostty/config` via `config-file = ../themes/current/ghostty.conf` |
+| `tmux.conf` | sourced from `.config/tmux/tmux.conf` via `source-file ~/.config/themes/current/tmux.conf` |
+| `starship.toml` | `STARSHIP_CONFIG` env var set from `~/.config/themes/current/starship.toml` |
+| `fzf` | sourced by `.bashrc` to set `FZF_DEFAULT_OPTS` |
+| `neovim` | one-line file with colorscheme name; read by `lua/plugins/colorscheme.lua` |
+
+The active theme is the symlink `~/.config/themes/current → <name>/` (per-host state, not in repo). `link.sh` sets a default of `tokyo-night` on first run.
+
+Switching:
+
+```sh
+theme              # show active
+theme list         # show available
+theme ember        # activate ember
+```
+
+After switching, ghostty and tmux reload immediately; re-source the shell (or open a new one) to pick up starship/fzf colors; nvim re-reads the colorscheme on next launch.
 
 ## Symlink Map
 
@@ -21,17 +45,17 @@ These are the managed dotfiles and where they link to. The `link.sh` script veri
 
 | Repo path | Symlink target |
 |---|---|
-| `.zshrc` | `~/.zshrc` |
-| `.vimrc` | `~/.vimrc` |
+| `.bashrc` | `~/.bashrc` |
+| `.bash_profile` | `~/.bash_profile` |
 | `.gitconfig` | `~/.gitconfig` |
 | `.ssh/config` | `~/.ssh/config` |
-| `.config/starship.toml` | `~/.config/starship.toml` |
-| `.config/starship-ember.toml` | `~/.config/starship-ember.toml` |
 | `.config/ghostty/config` | `~/.config/ghostty/config` |
-| `.config/bat/config` | `~/.config/bat/config` |
 | `.config/tmux/tmux.conf` | `~/.config/tmux/tmux.conf` |
-| `.config/tmux/tmux-ember.conf` | `~/.config/tmux/tmux-ember.conf` |
-| `.vim/colors/ember.vim` | `~/.vim/colors/ember.vim` |
+| `.config/themes/<name>` (each) | `~/.config/themes/<name>` |
+| `.config/nvim/init.lua` | `~/.config/nvim/init.lua` |
+| `.config/nvim/lua/config/*.lua` (each) | `~/.config/nvim/lua/config/*.lua` |
+| `.config/nvim/lua/plugins/colorscheme.lua` | `~/.config/nvim/lua/plugins/colorscheme.lua` |
+| `.config/nvim/colors/ember.vim` | `~/.config/nvim/colors/ember.vim` |
 | `.config/ranger/scope.sh` | `~/.config/ranger/scope.sh` |
 | `.config/ranger/rifle.conf` | `~/.config/ranger/rifle.conf` |
 | `.local/bin/git-backup.sh` | `~/.local/bin/git-backup.sh` |
@@ -45,27 +69,29 @@ When adding a new dotfile to the repo, also add it to the `LINKS` array in `link
 
 ## Key Files
 
-- **`.zshrc`** — shell config with aliases, tool init (starship, zoxide, fzf, atuin, direnv), and cyberpunk MOTD cheatsheet
-- **`.vimrc`** — Vim 9.1 config using vim-plug. Tokyo Night theme, lightline, fzf.vim, tpope essentials (commentary, surround, sleuth, fugitive, repeat), gitgutter, editorconfig. All default keybindings preserved — user is an experienced vi user
-- **`.gitconfig`** — delta as pager (side-by-side), vim as editor, pull rebase, auto stash
-- **`.config/starship.toml`** — prompt with git branch/status, language versions, Tokyo Night colors, Nerd Font icons
-- **`.config/starship-ember.toml`** — ember variant of starship prompt, auto-loaded via `STARSHIP_CONFIG` when `$SSH_CONNECTION` is set
-- **`.config/ghostty/config`** — terminal: Tokyo Night palette, JetBrainsMono Nerd Font, bar cursor
-- **`.config/tmux/tmux-ember.conf`** — red/orange tmux theme, auto-loaded via `tmux()` wrapper when in an SSH session (`$SSH_CONNECTION` set)
-- **`.vim/colors/ember.vim`** — red/orange vim colorscheme, auto-loaded by `.vimrc` when `$SSH_CONNECTION` is set
-- **`.config/bat/config`** — syntax highlighting with tokyonight_night theme
-- **`.config/ranger/scope.sh`** — preview script; uses glow for markdown rendering
-- **`.config/ranger/rifle.conf`** — file opener config; glow as default for markdown, vim as fallback
+- **`.bashrc`** — shell config; aliases, tool init (starship, zoxide, fzf), sources `~/.config/themes/current/{starship.toml,fzf}`, cyberpunk MOTD
+- **`.bash_profile`** — login-shell entrypoint; sources `.bashrc`
+- **`.config/nvim/init.lua`** — LazyVim entry point; bootstraps `lazy.nvim` via `lua/config/lazy.lua`
+- **`.config/nvim/lua/config/{lazy,options,keymaps}.lua`** — LazyVim bootstrap, option overrides, custom keymaps (delete-without-clipboard)
+- **`.config/nvim/lua/plugins/colorscheme.lua`** — resolves active colorscheme: SSH → `ember`, else read from `~/.config/themes/current/neovim`, else `tokyonight`
+- **`.config/nvim/colors/ember.vim`** — red/orange colorscheme for SSH sessions
+- **`.gitconfig`** — delta as pager (side-by-side), nvim as editor, pull rebase, auto stash
+- **`.config/ghostty/config`** — terminal: includes active theme palette, JetBrainsMono Nerd Font, bar cursor
+- **`.config/tmux/tmux.conf`** — tmux base config; sources active theme colors
+- **`.config/themes/`** — theme bundles (see Theme System above)
+- **`bin/theme`** — switcher command
+- **`bin/tclaude`** — tmux workspace launcher (Claude / nvim / shell panes)
+- **`.config/ranger/scope.sh`** — preview script for ranger
+- **`.config/ranger/rifle.conf`** — file opener config; uses `$EDITOR` for text/markdown
 - **`link.sh`** — symlink integrity scanner/repairer with cyberpunk UI (run `./link.sh` to verify all links)
 - **`tools.sh`** — dependency tracker that verifies all required CLI tools, fonts, and apps are installed (run `./tools.sh` to check; offers to install missing via Homebrew)
 
-## Vim Plugins (managed by vim-plug)
+## Nvim Plugins (LazyVim, managed by lazy.nvim)
 
-Plugins live in `~/.vim/plugged/` (not tracked in this repo). Run `:PlugInstall` after a fresh clone.
+LazyVim bootstraps itself on first `nvim` run — clones `lazy.nvim` to `~/.local/share/nvim/lazy/` and installs the LazyVim plugin set. The lockfile lives at `~/.config/nvim/lazy-lock.json` (untracked; commit if you want reproducibility).
 
-- tokyonight-vim, lightline.vim
-- vim-commentary, vim-surround, vim-sleuth, vim-fugitive, vim-repeat
-- vim-gitgutter, fzf.vim, editorconfig-vim
+Custom additions on top of LazyVim defaults:
+- `tokyonight.nvim` (default), `catppuccin/nvim`, `gruvbox.nvim` (lazy-loaded), plus the local `ember` colorscheme
 
 ## Setup on a Fresh Machine
 
@@ -73,13 +99,13 @@ Plugins live in `~/.vim/plugged/` (not tracked in this repo). Run `:PlugInstall`
 git clone git@github.com:splaice/dotfiles.git ~/Code/dotfiles
 cd ~/Code/dotfiles
 ./tools.sh         # checks & installs required tools
-./link.sh          # creates all symlinks
-vim +PlugInstall   # installs vim plugins
+./link.sh          # creates all symlinks; sets default theme to tokyo-night
+nvim               # first run: bootstraps lazy.nvim + installs LazyVim plugins
 ```
 
 ## Conventions
 
 - Commit messages: short imperative subject, optional body explaining why
-- Shell aliases go in the Aliases section of `.zshrc`
-- MOTD updates should maintain the cyberpunk box-drawing style with truecolor Tokyo Night palette
+- Shell aliases go in the Aliases section of `.bashrc`
+- MOTD updates should maintain the cyberpunk box-drawing style with truecolor palette
 - Never commit secrets — `.env` is sourced but not tracked

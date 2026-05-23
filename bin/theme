@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# theme — switch terminal theme across ghostty, tmux, nvim, starship, fzf
+#
+# Themes live in ~/.config/themes/<name>/. The active theme is selected
+# via the symlink ~/.config/themes/current → <name>/.
+#
+# After switching: ghostty and tmux reload immediately; the calling shell
+# needs `source ~/.bashrc` (or open a new shell) to pick up starship/fzf
+# colors; nvim re-reads the colorscheme on next launch.
+
+set -euo pipefail
+
+THEMES_DIR="$HOME/.config/themes"
+CURRENT_LINK="$THEMES_DIR/current"
+
+# ── helpers ──────────────────────────────────────────────
+R=$'\e[0m'
+DIM=$'\e[2m'
+BOLD=$'\e[1m'
+CYAN=$'\e[38;2;125;207;255m'
+GREEN=$'\e[38;2;158;206;106m'
+YELLOW=$'\e[38;2;224;175;104m'
+PINK=$'\e[38;2;247;118;142m'
+WHITE=$'\e[38;2;192;202;245m'
+
+list_themes() {
+  find "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d -o -type l 2>/dev/null \
+    | xargs -n1 basename 2>/dev/null \
+    | grep -v '^current$' \
+    | sort
+}
+
+current_theme() {
+  if [[ -L "$CURRENT_LINK" ]]; then
+    basename "$(readlink "$CURRENT_LINK")"
+  fi
+}
+
+usage() {
+  cat <<EOF
+${BOLD}${CYAN}theme${R} — switch terminal theme
+
+${BOLD}Usage${R}
+  ${WHITE}theme${R}                 ${DIM}show the active theme${R}
+  ${WHITE}theme list${R}            ${DIM}list available themes${R}
+  ${WHITE}theme <name>${R}          ${DIM}activate theme${R}
+
+${BOLD}Available${R}
+EOF
+  local cur
+  cur="$(current_theme)"
+  while IFS= read -r t; do
+    if [[ "$t" == "$cur" ]]; then
+      echo "  ${GREEN}● ${t}${R} ${DIM}${WHITE}(active)${R}"
+    else
+      echo "  ${DIM}○ ${t}${R}"
+    fi
+  done < <(list_themes)
+}
+
+# ── main ─────────────────────────────────────────────────
+if [[ $# -eq 0 || "${1:-}" == "current" ]]; then
+  cur="$(current_theme)"
+  if [[ -z "$cur" ]]; then
+    echo "${YELLOW}no theme active${R} — run ${CYAN}theme list${R}"
+    exit 0
+  fi
+  echo "$cur"
+  exit 0
+fi
+
+case "${1:-}" in
+  list|-l|--list|-h|--help)
+    usage
+    exit 0
+    ;;
+esac
+
+name="$1"
+target="$THEMES_DIR/$name"
+if [[ ! -d "$target" ]]; then
+  echo "${PINK}unknown theme: ${name}${R}" >&2
+  echo "" >&2
+  usage >&2
+  exit 1
+fi
+
+# Replace the symlink. `-n` keeps ln from descending into the existing symlinked dir.
+ln -sfn "$name" "$CURRENT_LINK"
+
+# Reload tmux if a server is running.
+if command -v tmux >/dev/null && tmux info >/dev/null 2>&1; then
+  tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true
+fi
+
+# Ghostty auto-reloads when its config-file include changes; nudge it.
+if command -v pkill >/dev/null; then
+  pkill -USR2 ghostty 2>/dev/null || true
+fi
+
+echo "${GREEN}✓${R} theme → ${BOLD}${CYAN}${name}${R}"
+echo "${DIM}${WHITE}  re-source the shell or open a new one for starship/fzf colors${R}"
+echo "${DIM}${WHITE}  nvim picks up the new colorscheme on next launch${R}"
