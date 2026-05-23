@@ -1,0 +1,63 @@
+# Starship Prompt — Techno Viking theme
+# Magenta-forward, with semantic green/yellow/red for status
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$java\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[❯](bold #F12EAF)"
+error_symbol = "[❯](bold #FF5C5C)"
+
+[directory]
+style = "bold #F12EAF"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold #FF5BC5"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold #F2C94C"
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
+style = "#F2C94C"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#5CE0A8"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#FF5C5C"
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#7DB5C0"
+
+[java]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "#FF5C5C"
+
+[cmd_duration]
+min_time = 2_000
+format = "[$duration]($style) "
+style = "bold #5A6469"

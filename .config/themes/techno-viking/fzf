@@ -1,0 +1,5 @@
+export FZF_DEFAULT_OPTS='
+  --color=bg+:#1C2326,bg:#0B1012,spinner:#F12EAF,hl:#F12EAF
+  --color=fg:#E8E7E5,header:#FF5BC5,info:#F2C94C,pointer:#F12EAF
+  --color=marker:#5CE0A8,fg+:#E8E7E5,prompt:#F2C94C,hl+:#FF5BC5
+  --height=40% --layout=reverse --border'
