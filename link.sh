@@ -8,7 +8,7 @@ set -euo pipefail
 DOTFILES="$HOME/Code/dotfiles"
 
 # ── Colors ───────────────────────────────────────────────────
-R=$'\e[0m'         # reset
+R=$'\e[0m' # reset
 DIM=$'\e[2m'
 BOLD=$'\e[1m'
 BLINK=$'\e[5m'
@@ -34,7 +34,6 @@ LINKS=(
   ".bash_profile:$HOME/.bash_profile"
   ".gitconfig:$HOME/.gitconfig"
   ".ssh/config:$HOME/.ssh/config"
-  ".ssh/config.d/private:$HOME/.ssh/config.d/private"
   ".config/ghostty/config:$HOME/.config/ghostty/config"
   ".config/tmux/tmux.conf:$HOME/.config/tmux/tmux.conf"
   ".config/themes/tokyo-night:$HOME/.config/themes/tokyo-night"
@@ -198,9 +197,9 @@ print_results() {
   else
     echo "  ${YELLOW}${BOLD}┌─ SCAN COMPLETE ─────────────────────────────────────${R}"
     echo "  ${YELLOW}${BOLD}│${R}"
-    [[ $OK -gt 0 ]]       && echo "  ${YELLOW}${BOLD}│${R}  ${glyph_ok} ${GREEN}${BOLD}${OK}${R} ${WHITE}intact${R}" || true
+    [[ $OK -gt 0 ]] && echo "  ${YELLOW}${BOLD}│${R}  ${glyph_ok} ${GREEN}${BOLD}${OK}${R} ${WHITE}intact${R}" || true
     [[ $REPAIRED -gt 0 ]] && echo "  ${YELLOW}${BOLD}│${R}  ${glyph_fix} ${YELLOW}${BOLD}${REPAIRED}${R} ${WHITE}repaired${R}" || true
-    [[ $FAILED -gt 0 ]]   && echo "  ${YELLOW}${BOLD}│${R}  ${glyph_fail} ${PINK}${BOLD}${FAILED}${R} ${WHITE}failed${R}" || true
+    [[ $FAILED -gt 0 ]] && echo "  ${YELLOW}${BOLD}│${R}  ${glyph_fail} ${PINK}${BOLD}${FAILED}${R} ${WHITE}failed${R}" || true
     echo "  ${YELLOW}${BOLD}│${R}"
     echo "  ${YELLOW}${BOLD}└──────────────────────────────────────────────────────${R}"
   fi
