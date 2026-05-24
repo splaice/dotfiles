@@ -79,3 +79,4 @@ printf '\e[>0u' 2>/dev/null
 
 # Added by tally installer
 export PATH="$HOME/.tally/bin:$PATH"
+source ~/.git-completion.bash
