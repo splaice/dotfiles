@@ -49,61 +49,28 @@ alias claud='claude && reset'
 alias m='cd ~/Maniple'
 alias mosh='mosh --server=/opt/homebrew/bin/mosh-server'
 
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] &&
+  . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+
 # ── SSH Remote Colors ─────────────────────────────────
-# Swaps to a red/orange "Ember" palette when SSH'd into a remote host,
-# then restores Tokyo Night on disconnect.
-_ssh_ember_theme() {
-  # bg / fg / cursor
-  printf '\e]11;#1c1210\e\\'
-  printf '\e]10;#d8c4b0\e\\'
-  printf '\e]12;#ff8c42\e\\'
-  # palette 0-15
-  printf '\e]4;0;#1a1410\e\\'
-  printf '\e]4;1;#ff6b6b\e\\'
-  printf '\e]4;2;#b8a84a\e\\'
-  printf '\e]4;3;#e89048\e\\'
-  printf '\e]4;4;#d47850\e\\'
-  printf '\e]4;5;#c86878\e\\'
-  printf '\e]4;6;#e09860\e\\'
-  printf '\e]4;7;#b8a898\e\\'
-  printf '\e]4;8;#4a3830\e\\'
-  printf '\e]4;9;#ff8888\e\\'
-  printf '\e]4;10;#d0bc5c\e\\'
-  printf '\e]4;11;#f0a460\e\\'
-  printf '\e]4;12;#e09068\e\\'
-  printf '\e]4;13;#d87888\e\\'
-  printf '\e]4;14;#f0b070\e\\'
-  printf '\e]4;15;#e8d4c0\e\\'
+# Visual indicator that you're on a remote host. The local terminal's
+# palette swaps to "ember" (red/orange) for the duration of the ssh
+# session, then restores the currently-active theme on disconnect.
+# Pure local OSC-escape mechanism — the remote host needs nothing.
+_apply_palette() {
+  local p="$HOME/.config/themes/$1/palette.sh"
+  [[ -r "$p" ]] && . "$p"
 }
 
-_ssh_tokyonight_theme() {
-  # bg / fg / cursor
-  printf '\e]11;#1a1b26\e\\'
-  printf '\e]10;#c0caf5\e\\'
-  printf '\e]12;#c0caf5\e\\'
-  # palette 0-15
-  printf '\e]4;0;#15161e\e\\'
-  printf '\e]4;1;#f7768e\e\\'
-  printf '\e]4;2;#9ece6a\e\\'
-  printf '\e]4;3;#e0af68\e\\'
-  printf '\e]4;4;#7aa2f7\e\\'
-  printf '\e]4;5;#bb9af7\e\\'
-  printf '\e]4;6;#7dcfff\e\\'
-  printf '\e]4;7;#a9b1d6\e\\'
-  printf '\e]4;8;#414868\e\\'
-  printf '\e]4;9;#f7768e\e\\'
-  printf '\e]4;10;#9ece6a\e\\'
-  printf '\e]4;11;#e0af68\e\\'
-  printf '\e]4;12;#7aa2f7\e\\'
-  printf '\e]4;13;#bb9af7\e\\'
-  printf '\e]4;14;#7dcfff\e\\'
-  printf '\e]4;15;#c0caf5\e\\'
+_current_theme() {
+  [[ -L "$HOME/.config/themes/current" ]] || return 1
+  basename "$(readlink "$HOME/.config/themes/current")"
 }
 
 _ssh_color_wrap() {
-  _ssh_ember_theme
+  _apply_palette ember
   command ssh "$@"
-  _ssh_tokyonight_theme
+  _apply_palette "$(_current_theme)"
 }
 alias ssh='_ssh_color_wrap'
 

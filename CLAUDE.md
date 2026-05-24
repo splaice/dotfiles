@@ -26,6 +26,7 @@ Themes live under `.config/themes/<name>/`. Each contains theme-specific files f
 | `starship.toml` | `STARSHIP_CONFIG` env var set from `~/.config/themes/current/starship.toml` |
 | `fzf` | sourced by `.bashrc` to set `FZF_DEFAULT_OPTS` |
 | `neovim` | one-line file with colorscheme name; read by `lua/plugins/colorscheme.lua` |
+| `palette.sh` | OSC escape printfs; sourced by `.bashrc`'s `_apply_palette` to swap the running terminal's 16-color palette (used by the ssh wrapper) |
 
 The active theme is the symlink `~/.config/themes/current → <name>/` (per-host state, not in repo). `link.sh` sets a default of `tokyo-night` on first run.
 
@@ -38,6 +39,12 @@ theme ember        # activate ember
 ```
 
 After switching, ghostty and tmux reload immediately; re-source the shell (or open a new one) to pick up starship/fzf colors; nvim re-reads the colorscheme on next launch.
+
+## SSH Visual Indicator
+
+The `ssh` command is aliased to a wrapper (`_ssh_color_wrap` in `.bashrc`) that swaps the local terminal's palette to ember (red/orange) for the session, then restores the active theme on disconnect. The remote host is untouched — this is pure local OSC-escape manipulation, so no dotfiles need to be installed on the other side.
+
+Mechanism: `_apply_palette <theme>` sources `~/.config/themes/<theme>/palette.sh`, which emits OSC `]10/]11/]12` (fg/bg/cursor) and `]4;0..15` (palette) escapes to the running terminal.
 
 ## Symlink Map
 

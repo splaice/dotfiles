@@ -1,7 +1,5 @@
--- Resolve colorscheme:
---   1. If $SSH_CONNECTION is set, use the ember scheme (red/orange remote palette).
---   2. Else read the active theme name from ~/.config/themes/current/neovim (one line).
---   3. Fall back to tokyonight.
+-- Resolve colorscheme: read the active theme name from
+-- ~/.config/themes/current/neovim (one line), else fall back to tokyonight.
 local function read_theme()
   local path = vim.fn.expand("~/.config/themes/current/neovim")
   local f = io.open(path, "r")
@@ -13,12 +11,7 @@ local function read_theme()
   return name
 end
 
-local colorscheme
-if vim.env.SSH_CONNECTION and vim.env.SSH_CONNECTION ~= "" then
-  colorscheme = "ember"
-else
-  colorscheme = read_theme() or "tokyonight"
-end
+local colorscheme = read_theme() or "tokyonight"
 
 return {
   { "LazyVim/LazyVim", opts = { colorscheme = colorscheme } },
