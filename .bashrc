@@ -80,3 +80,22 @@ printf '\e[>0u' 2>/dev/null
 # Added by tally installer
 export PATH="$HOME/.tally/bin:$PATH"
 source ~/.git-completion.bash
+
+# Workaround cmux 0.64.x: bash-5.3 ${ ... ; } PS0 hook leaks "[N] Done"
+# notifications for backgrounded cmux helpers (report_shell_state, ports_kick)
+# past `disown`, because the funsub runs in the current shell instead of a
+# subshell. Swap in the legacy $(...) subshell form (cmux's own bash<5.3
+# fallback), which contains the background jobs and doesn't leak.
+#
+# cmux injects its integration AFTER rc files load, so PS0 is still empty here
+# at source time. Run the rewrite from PROMPT_COMMAND (fires every prompt, after
+# cmux has set PS0) instead of once inline. It's idempotent, so repeats are safe.
+_cmux_fix_ps0_leak() {
+    if [[ "$PS0" == *'${ _cmux_bash_preexec_hook'* ]]; then
+        PS0="${PS0//\$\{ _cmux_bash_preexec_hook \"\$BASH_COMMAND\"\; \}/\$(_cmux_bash_preexec_hook \"\$BASH_COMMAND\" >/dev/null)}"
+    fi
+}
+case ";${PROMPT_COMMAND};" in
+    *";_cmux_fix_ps0_leak;"*) ;;
+    *) PROMPT_COMMAND="_cmux_fix_ps0_leak;${PROMPT_COMMAND}" ;;
+esac
